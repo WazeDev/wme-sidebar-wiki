@@ -21,6 +21,30 @@
     let otherNavItems;
     let otherSidePanels;
     let tabContent;
+    let locale;
+    let wikiPath = "/c/wazeopedia/5162/none";
+
+    window.SDK_INITIALIZED.then(init);
+
+    function init() {
+        const sdk = window.getWmeSdk({
+            scriptId: 'wme-sidebar-wiki',
+            scriptName: 'WME Sidebar Wiki'
+        });
+        locale = sdk.Settings.getLocale().localeCode;
+        localeMatcher();
+        waitForElm('.tab-content').then((elm) => {
+            createNavIcon();
+            createSidebar();
+        });
+    }
+
+    function localeMatcher() {
+        switch (locale) {
+            case "en-US":
+                wikiPath = "/c/wazeopedia/usa-wazeopedia/5240/none"
+        }
+    }
 
     function waitForElm(selector) {
         return new Promise(resolve => {
@@ -72,7 +96,7 @@
         sidebar.className = "tab-pane sidebar-tab-pane";
         sidebar.style = "max-width: 100%; width: inherit;";
         sidebar.id = "sidepanel-wiki";
-        iframe.src = "https://www.waze.com/discuss/c/wazeopedia/5162?mobile_view=1";
+        iframe.src = `https://www.waze.com/discuss${wikiPath}?mobile_view=1`;
         sidebar.appendChild(iframe);
         tabContent = document.getElementsByClassName("tab-content")[0];
         tabContent.insertBefore(sidebar, document.getElementById("sidepanel-prefs").nextSibling);
@@ -125,8 +149,4 @@
         document.getElementById("sidepanel-wiki").className = "tab-pane sidebar-tab-pane";
         toggleSidebar = false;
     }
-    waitForElm('.tab-content').then((elm) => {
-        createNavIcon();
-        createSidebar();
-    });
 })();
