@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         WME Sidebar Wiki
 // @namespace    https://github.com/WazeDev/wme-sidebar-wiki
-// @version      0.0.2
-// @description  Adds the wiki to the WME sidebar.
+// @version      0.0.3
+// @description  Adds the wiki to the sidebar.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://beta.waze.com/*editor*
 // @match        https://www.waze.com/*editor*
@@ -72,7 +72,7 @@
         sidebar.className = "tab-pane sidebar-tab-pane";
         sidebar.style = "max-width: 100%; width: inherit;";
         sidebar.id = "sidepanel-wiki";
-        iframe.src = "https://www.waze.com/discuss/c/wazeopedia/5162/none";
+        iframe.src = "https://www.waze.com/discuss/c/wazeopedia/5162?mobile_view=1";
         sidebar.appendChild(iframe);
         tabContent = document.getElementsByClassName("tab-content")[0];
         tabContent.insertBefore(sidebar, document.getElementById("sidepanel-prefs").nextSibling);
