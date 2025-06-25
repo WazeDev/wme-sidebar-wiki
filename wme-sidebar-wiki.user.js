@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME Sidebar Wiki
 // @namespace    https://github.com/WazeDev/wme-sidebar-wiki
-// @version      0.0.4
+// @version      0.0.5
 // @description  Adds the wiki to the sidebar.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://beta.waze.com/*editor*
@@ -21,7 +21,7 @@
     let otherNavItems;
     let otherSidePanels;
     let tabContent;
-    let locale;
+    let countryAbbr;
     let wikiPath = "/c/wazeopedia/5162/none";
 
     window.SDK_INITIALIZED.then(init);
@@ -31,18 +31,25 @@
             scriptId: 'wme-sidebar-wiki',
             scriptName: 'WME Sidebar Wiki'
         });
-        locale = sdk.Settings.getLocale().localeCode;
-        localeMatcher();
+        countryAbbr = sdk.DataModel.Countries.getTopCountry().abbr;
+        countryAbbrMatcher();
         waitForElm('.tab-content').then((elm) => {
             createNavIcon();
             createSidebar();
         });
     }
 
-    function localeMatcher() {
-        switch (locale) {
-            case "en-US":
+    function countryAbbrMatcher() {
+        switch (countryAbbr) {
+            case "US":
                 wikiPath = "/c/wazeopedia/usa-wazeopedia/5240/none"
+                break
+            case "CA":
+                wikiPath = "/c/wazeopedia/canada-wazeopedia/5181/none"
+                break
+            case "MX":
+                wikiPath = "/c/wazeopedia/mexico-wazeopedia/5214/none"
+                break
         }
     }
 
