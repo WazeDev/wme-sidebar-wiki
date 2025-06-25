@@ -2,7 +2,7 @@
 // @name         WME Sidebar Wiki
 // @namespace    https://github.com/WazeDev/wme-sidebar-wiki
 // @version      0.0.2
-// @description  Adds the wiki to the sidebar.
+// @description  Adds the wiki to the WME sidebar.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://beta.waze.com/*editor*
 // @match        https://www.waze.com/*editor*
