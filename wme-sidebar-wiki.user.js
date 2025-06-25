@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME Sidebar Wiki
 // @namespace    https://github.com/WazeDev/wme-sidebar-wiki
-// @version      0.0.5
+// @version      0.0.6
 // @description  Adds the wiki to the sidebar.
 // @author       Gavin Canon-Phratsachack (https://github.com/gncnpk)
 // @match        https://beta.waze.com/*editor*
@@ -26,11 +26,14 @@
 
     window.SDK_INITIALIZED.then(init);
 
-    function init() {
+    async function init() {
         const sdk = window.getWmeSdk({
             scriptId: 'wme-sidebar-wiki',
             scriptName: 'WME Sidebar Wiki'
         });
+        while (sdk.DataModel.Countries.getTopCountry() === null) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
         countryAbbr = sdk.DataModel.Countries.getTopCountry().abbr;
         countryAbbrMatcher();
         waitForElm('.tab-content').then((elm) => {
