@@ -125,7 +125,7 @@
         document.getElementById("sidepanel-wiki").className = "tab-pane sidebar-tab-pane";
         toggleSidebar = false;
     }
-    waitForElm('#drawer').then((elm) => {
+    waitForElm('.tab-content').then((elm) => {
         createNavIcon();
         createSidebar();
     });
